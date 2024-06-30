@@ -1,6 +1,8 @@
 # cabopilot-llm
 This repository hosts a POC of a customized Large Language Model (LLM) specifically tailored to support beginner Data Engineers in their learning and development journey.
 
+![Texto alternativo](./assets/cabopilot-home.png "Cabopilot LLM Homepage")
+
 ## Disclaimer
 
 The author is not responsible for any damage caused by the misuse of the tool.
@@ -55,12 +57,24 @@ Update Docker Compose: GPU support in Docker Compose requires version `1.28.0` o
 
 ## Setup
 
-### Docker Services
+### Start Docker Services
+
+To create docker network POC, execute:
+
+```bash
+cd /ollama && make network-create NETWORK=poc
+```
 
 To start the Ollama service, run:
 
 ```bash
-cd /ollama && make build up
+make build up
+```
+
+To start the OpenWebUI service, run:
+
+```bash
+cd ../openwebui/ && make build up
 ```
 
 ### Customize the Cabopilot
@@ -85,7 +99,46 @@ Finally, run the new model `cabopilot`:
 make model-run
 ```
 
-Ask questions and have fun, to exit execute `ctrl + d`:
+Ask questions and have fun, to exit execute `ctrl + d`.
+
+### Access the Cabopilot from OpenWebUI
+
+Check if each service is running correctly accessing:
+
+```
+- Ollama: http://localhost:11434/
+- OpenWebUI: http://localhost:3000/
+```
+
+Create a admin account for tests, you can use a fake credentials sush as:
+
+```
+Full Name: Admin Admin
+Email: admin@cabopilot.com
+Password: cabopilotpass
+```
+
+On the left top selector pick the model:
+
+```
+cabopilot:latest
+```
+
+Ask questions and have fun!
+
+### Stop Docker Services
+
+To stop the Ollama service, run:
+
+```bash
+cd /ollama && make down
+```
+
+To start the OpenWebUI service, run:
+
+```bash
+cd ../openwebui && make down
+```
 
 ## References
 
@@ -93,3 +146,8 @@ Ask questions and have fun, to exit execute `ctrl + d`:
 
 - repository: https://github.com/ollama/ollama
 - dockerhub: https://hub.docker.com/r/ollama/ollama
+
+### OpenWebUI
+
+- site: https://openwebui.com/ 
+- documentation: https://docs.openwebui.com/
